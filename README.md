@@ -1,7 +1,7 @@
 TODO
 ===========
 - Allowing implicit multiplication e.g.: 4x+1 = 4 * x + 1
-- Aloww calculation using degree instead of rad
+- Allow calculation using degree instead of rad
 
 BUGS
 ========

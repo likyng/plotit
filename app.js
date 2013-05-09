@@ -10,19 +10,6 @@ $(document).ready(function() {
 				return this.slice(0, index) + string + this.slice(index);
 		}};
 
-  String.prototype.convInpt = function convInpt() {
-    var str = this;
-    str = replaceTrig(str);
-	str = replacePow(str);
-
-	return str;
-	};
-
-	String.prototype.replaceAll = function(str1, str2, ignore)
-	{
-    return this.replace(new RegExp(str1.replace(/([\/\,\!\\\^\$\{\}\[\]\(\)\.\*\+\?\|\<\>\-\&])/g,"\\$&"),(ignore?"gi":"g")),(typeof(str2)=="string")?str2.replace(/\$/g,"$$$$"):str2);
-	};
-
 	$('input').on('keypress', function(e) {
 		if(13 !== e.which) 
 			return;
@@ -55,7 +42,6 @@ $(document).ready(function() {
 		this.drawAxis("y");
  	 };
 
-
 	Plot.prototype.drawAxis = function(axis) {
 		var ctx = this.ctx;
 		ctx.save();
@@ -82,11 +68,6 @@ $(document).ready(function() {
 		ctx.clearRect(0, 0, this.can.width, this.can.height);
 	};
 
-  	Plot.prototype.setEqn = function(equation) {
-  		this.equation = equation;
-  	};
-
-
 	Plot.prototype.drawPlot = function(expr, thickness) {
 		var ctx = this.ctx;
 		this.drawAxis("y");
@@ -106,29 +87,7 @@ $(document).ready(function() {
 		ctx.stroke();
 		ctx.restore();
 	};
-
 	
-	/*Plot.prototype.drawPlot = function(equation, thickness) {
-		var ctx = this.ctx;
-		//ctx.clearRect(0, 0, this.can.width, this.can.height);
-		this.drawAxis("y");
-		this.drawAxis("x");
-		ctx.save();
-
-		this.transformContext();
-		ctx.beginPath();
-		ctx.moveTo(this.minX, equation(this.minX));
-
-    //this.iter = (maxX - minX) / 1000, bei 10,-10 also 0.02
-		for(var i = this.minX + this.iter; i <= this.maxX; i += this.iter)
-			ctx.lineTo(i, equation(i));
-
-		ctx.restore();
-		ctx.lineWidth = thickness;
-		ctx.stroke();
-		ctx.restore();
-	};*/
-
 	Plot.prototype.transformContext = function() {
 		var ctx = this.ctx;
 		this.ctx.translate(this.centerX, this.centerY);
