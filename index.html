@@ -1,15 +1,22 @@
 <!doctype HTML>
 <html>
 <head>
-  <title>Equation Plotter!:)</title>
+	<title>Equation Plotter!:)</title>
+	<link href="style.css" type="text/css" rel="stylesheet" />
   	<script src="jquery-2.0.0.min.js"></script>
   	<script src="parser.js"></script>
 	<script src="app.js"></script>
 </head>
 <body>
-  <canvas id="can" height="600px" width="600px"></canvas>
-	<input type="number" name="eqn">
-  <div>Hi!, enter Equation: </div>
+	<canvas id="can" height="600px" width="600px"></canvas>
+	<h5>Hi!, enter Equation: </h5> <input type="number" name="eqn">
+	<div>Enter your equation above and it will be plotted. Things to keep in mind:</div>
+	<ul>
+		<li>ALL functions need parentheses sinx will NOT work, sin(x) WILL!</li>
+		<li>x! has to expressed as fac(x)</li>
+		<li>log(x) refers to the NATURAL logarithm, usually called ln(x)</li>
+		<li>implicit multiplication does not work, yet: 4x will not work but 4*x will</li>
+	</ul>
 
 </body>
 </html>

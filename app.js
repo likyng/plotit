@@ -10,13 +10,24 @@ $(document).ready(function() {
 				return this.slice(0, index) + string + this.slice(index);
 		}};
 
+	function resizeCanvas() {
+		$("#can")
+			.attr('width', $(window).width() * 0.9)
+			.attr('height', $(window).height() * 0.8);
+		//graph.plotIt();
+	};
+
+	resizeCanvas();
+	$(window).resize(function() {
+		resizeCanvas();
+		graph.plotIt();
+	});
+
+
 	$('input').on('keypress', function(e) {
 		if(13 !== e.which) 
 			return;
-    	var input = $(this).val();
-		var expr = Parser.parse(input);
-		graph.clear();
-    	graph.drawPlot(expr, 2);
+		graph.plotIt();
 	});
 
 	function Plot(cfg) {
@@ -41,6 +52,23 @@ $(document).ready(function() {
 		this.drawAxis("x");
 		this.drawAxis("y");
  	 };
+
+	Plot.prototype.plotIt = function() {
+		this.clear();
+		var expr = Parser.parse($('input').val());
+		this.drawPlot(expr, 2);
+	};
+
+	Plot.prototype.setUp = function() {
+		this.centerY = Math.round(Math.abs(this.minY / this.rangeY) * this.can.height);
+		this.centerX = Math.round(Math.abs(this.minX / this.rangeX) * this.can.width);
+		this.scaleX = this.can.width / this.rangeX;
+		this.scaleY = this.can.height / this.rangeY;
+		this.axisLW = 1;
+
+		this.drawAxis("x");
+		this.drawAxis("y");
+	};
 
 	Plot.prototype.drawAxis = function(axis) {
 		var ctx = this.ctx;
@@ -70,8 +98,7 @@ $(document).ready(function() {
 
 	Plot.prototype.drawPlot = function(expr, thickness) {
 		var ctx = this.ctx;
-		this.drawAxis("y");
-		this.drawAxis("x");
+		this.setUp();
 		ctx.save();
 
 		this.transformContext();
