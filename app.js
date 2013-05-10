@@ -14,7 +14,7 @@ $(document).ready(function() {
 		$("#can")
 			.attr('width', $(window).width() * 0.9)
 			.attr('height', $(window).height() * 0.8);
-		//graph.plotIt();
+		$("#centered").width($(window).width() * 0.9);
 	};
 
 	resizeCanvas();
